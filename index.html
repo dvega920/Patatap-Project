@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patatap Project</title>
+    <script type="text/javascript" src="assets/lib/paperjs-v0.12.4/dist/paper-full.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-core.js"
+        integrity="sha256-4RbE3uL885YZdiAriyD8rRewYR78XTCqSgB35J9DlGQ=" crossorigin="anonymous"></script>
+
+    </script>
+
+    <script type="text/paperscript" canvas="myCanvas">
+
+
+var keyData = {
+    a: {
+    color: "red",
+    sound: new Howl({
+        src: ['sounds/bubbles.mp3']
+        })
+    },
+
+    b: {
+    color: "orange",
+    sound: new Howl({
+        src: ['sounds/clay.mp3']
+        })
+    },
+
+    c: {
+    color: "green",
+    sound: new Howl({
+        src: ['sounds/confetti.mp3']
+        })
+    },
+
+    d: {
+    color: "yellow",
+    sound: new Howl({
+        src: ['sounds/corona.mp3']
+        })
+    },
+
+    e: {
+    color: "blue",
+    sound: new Howl({
+        src: ['sounds/dotted-spiral.mp3']
+        })
+    },
+
+    f: {
+    color: "grey",
+    sound: new Howl({
+        src: ['sounds/flash-1.mp3']
+        })
+    },
+
+    g: {
+    color: "pink",
+    sound: new Howl({
+        src: ['sounds/flash-2.mp3']
+        })
+    },
+
+    h: {
+    color: "#8e7887",
+    sound: new Howl({
+        src: ['sounds/flash-3.mp3']
+        })
+    },
+
+    i: {
+    color: "#b299b2",
+    sound: new Howl({
+        src: ['sounds/glimmer.mp3']
+        })
+    },
+
+    j: {
+    color: "#f3cda0",
+    sound: new Howl({
+        src: ['sounds/moon.mp3']
+        })
+    },
+    
+    k: {
+    color: "#f3e6b5",
+    sound: new Howl({
+        src: ['sounds/pinwheel.mp3']
+        })
+    },
+
+    l: {
+    color: "#ffffbe",
+    sound: new Howl({
+        src: ['sounds/piston-1.mp3']
+        })
+    },
+
+    m: {
+    color: "#ff0000",
+    sound: new Howl({
+        src: ['sounds/piston-2.mp3']
+        })
+    },
+
+    n: {
+    color: "#f90096",
+    sound: new Howl({
+        src: ['sounds/piston-3.mp3']
+        })
+    },
+
+    o: {
+    color: "#ff00ff",
+    sound: new Howl({
+        src: ['sounds/prism-1.mp3']
+        })
+    },
+
+    p: {
+    color: "#9600ff",
+    sound: new Howl({
+        src: ['sounds/prism-2.mp3']
+        })
+    },
+
+    q: {
+    color: "#8500f9",
+    sound: new Howl({
+        src: ['sounds/prism-3.mp3']
+        })
+    },
+
+    r: {
+    color: "#691b78",
+    sound: new Howl({
+        src: ['sounds/splits.mp3']
+        })
+    },
+
+    s: {
+    color: "#ee0c39",
+    sound: new Howl({
+        src: ['sounds/squiggle.mp3']
+        })
+    },
+
+    t: {
+    color: "#33c91c",
+    sound: new Howl({
+        src: ['sounds/strike.mp3']
+        })
+    },
+
+    u: {
+    color: "#ce1468",
+    sound: new Howl({
+        src: ['sounds/suspension.mp3']
+        })
+    },
+
+    v: {
+    color: "#563831",
+    sound: new Howl({
+        src: ['sounds/timer.mp3']
+        })
+    },
+
+    w: {
+    color: "#ea8462",
+    sound: new Howl({
+        src: ['sounds/ufo.mp3']
+        })
+    },
+
+    x: {
+    color: "#ff8d00",
+    sound: new Howl({
+        src: ['sounds/veil.mp3']
+        })
+    },
+
+    y: {
+    color: "#90dbff",
+    sound: new Howl({
+        src: ['sounds/wipe.mp3']
+        })
+    },
+
+    z: {
+    color: "#4dd7ff",
+    sound: new Howl({
+        src: ['sounds/zig-zag.mp3']
+        })
+    }
+}
+        var circles = [];
+
+    function onKeyDown(event) {
+        if (keyData[event.key]){
+        var maxPoint = new Point (view.size.width, view.size.height);
+        var randomPoint = Point.random();
+        var point = maxPoint * randomPoint;
+        var newCircle = new Path.Circle(point, 500)
+        newCircle.fillColor = keyData[event.key].color;
+        keyData[event.key].sound.play();
+        circles.push(newCircle);
+        }
+}
+
+
+    function onFrame(event){
+        for (var i = 0; i < circles.length; i++){ 
+            circles[i].scale(0.9); 
+            circles[i].fillColor.hue +=1; 
+
+            if (circles[i].area < 1){
+                circles[i].remove();
+                circles.splice(i, 1);
+            console.log(circles);
+
+            }
+    } 
+} 
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.min.js"
+        integrity="sha256-/Q4ZPy6sMbk627wHxuaWSIXS1y7D2KnMhsm/+od7ptE=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="assets/css/patatap.css">
+
+</head>
+
+<body>
+    <canvas id="myCanvas" resize></canvas>
+
+</body>
+
+</html>
